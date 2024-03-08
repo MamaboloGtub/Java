@@ -1,0 +1,1 @@
+well this is going to be a roller coaster of a learning curve.  I have been introduced to java through springboot  but I think I should learn it without springboot to understand most things.  Wish me luck.
