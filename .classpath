@@ -6,5 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Program Files/jar_files/json-20240205.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
