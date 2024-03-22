@@ -1,24 +1,29 @@
 package weatherApi;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+import java.util.TimeZone;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class WeatherMainClass {
-	private static final String API_KEY = "c5486e85d345c3d2dc28f111649204e6";
+	private static final String API_KEY = System.getenv("MY_WEATHER_API_KEY");
 	private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/forecast?q=";
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String city = "Pretoria";
-		String urlString = BASE_URL + city + "&appid=" + API_KEY + "&units=metric";
 		try {
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			System.out.print("Enter your city: ");
+			String city = reader.readLine().trim();
+			String urlString = BASE_URL + city + "&appid=" + API_KEY + "&units=metric";
 			String dataString = fetchWeatherData(urlString);
 			if (dataString != null) {
 				parseAndDisplayWeatherData(dataString);
@@ -56,14 +61,14 @@ public class WeatherMainClass {
             JSONObject weatherObject = weatherArray.getJSONObject(i);
             JSONObject main = weatherObject.getJSONObject("main");
             long dateTime = weatherObject.getLong("dt");
-            
+
             double temp = main.getDouble("temp");
             double tempMin = main.getDouble("temp_min");
             double tempMax = main.getDouble("temp_max");
             double humidity = main.getDouble("humidity");
             String weatherDate = convertTimeStamptoTime(dateTime);
             
-
+            //.out.println("City: " + cityName);
             System.out.println("Date/Time: " + weatherDate + " GMT");
             System.out.println("Temperature: " + temp + "°C");
             System.out.println("Min Temperature: " + tempMin + "°C");
